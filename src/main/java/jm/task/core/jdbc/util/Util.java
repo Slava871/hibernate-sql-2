@@ -12,6 +12,7 @@ public class Util {
     private static final String DB_PASSWORD = "damuhe65";
 
 
+    //здесь не получилось применить try  с ресурсами из-за return
     public Connection getConnection() {
         Connection connection = null;
         try {
