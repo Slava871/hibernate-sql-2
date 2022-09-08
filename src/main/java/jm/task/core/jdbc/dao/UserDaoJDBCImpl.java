@@ -10,9 +10,9 @@ import java.util.List;
 import static java.sql.DriverManager.*;
 
 
-public class UserDaoJDBCImpl extends Util implements UserDao {
+public class UserDaoJDBCImpl  implements UserDao {
 
-    Connection connection = getConnection();
+    Connection connection = new Util().getConnection();
 
     public UserDaoJDBCImpl() {
 
