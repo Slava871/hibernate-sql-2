@@ -18,7 +18,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
             String sql = "CREATE TABLE table_kata_usr(id INT NOT null AUTO_INCREMENT, name Varchar(30), lastName Varchar(30), age INT NOT null, PRIMARY KEY (id))";
-            session.createNativeQuery(sql).addEntity(User.class);
+            session.createSQLQuery(sql);
             transaction.commit();
         } catch (HibernateException e) {
             System.out.println("при создании таблицы возникли проблемы");
@@ -34,7 +34,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
             String sql = "DROP TABLE test_base.table_kata_usr";
-            session.createSQLQuery(sql).addEntity(User.class).executeUpdate();
+            session.createSQLQuery(sql).executeUpdate();
             transaction.commit();
         }catch (HibernateException e) {
             System.out.println("при удалении таблицы возникли проблемы");
@@ -82,7 +82,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
             String sql = "SELECT * FROM table_kata_usr";
-            List<User> userList = session.createNativeQuery(sql).addEntity(User.class).list();
+            List<User> userList = session.createSQLQuery(sql).addEntity(User.class).list();
             transaction.commit();
             return userList;
         }catch (HibernateException e) {
