@@ -84,7 +84,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             String sql = "SELECT * FROM table_kata_usr";
             List<User> userList = session.createNativeQuery(sql).addEntity(User.class).list();
-            session.getTransaction().commit();
+            transaction.commit();
             return userList;
         }catch (HibernateException e) {
             System.out.println("при получении  пользователей  возникли проблемы");
@@ -101,6 +101,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
             session.createSQLQuery("truncate table table_kata_usr").executeUpdate();
+            transaction.commit();
         }catch (HibernateException e) {
             System.out.println("при очистке таблицы  возникли проблемы");
             if (transaction != null) {
